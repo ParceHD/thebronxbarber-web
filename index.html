@@ -99,6 +99,16 @@
   }
   .btn-gold:hover { box-shadow: 0 16px 40px -10px rgba(212, 175, 55, 0.8); }
 
+  .btn-big {
+    padding: 22px 48px;
+    font-size: 1.15rem;
+    animation: pulse-glow 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.6); }
+    50% { box-shadow: 0 16px 48px -8px rgba(212, 175, 55, 0.95); }
+  }
+
   .btn-outline {
     background: transparent;
     border-color: var(--border);
@@ -227,6 +237,10 @@
 
   .ig-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
   .ig-actions .btn { padding: 12px 22px; font-size: 0.85rem; }
+
+  .cards-wide { max-width: 980px; }
+  .cards-row { display: flex; gap: 24px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  .cards-row .ig-card { flex: 1 1 380px; max-width: 420px; }
 
   .hero-headline { margin-top: 46px; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.15; }
   .hero-community { margin-top: 14px; color: var(--text-dim); font-size: 1rem; }
@@ -429,8 +443,7 @@
   <h2>¿Listo para tu <span class="gold-text">corte a domicilio</span>?</h2>
   <p>Escríbeme por WhatsApp o rellena el formulario de reserva. Coordinamos hora, lugar y precio en minutos.</p>
   <div class="btn-row">
-    <a href="#reserva" class="btn btn-gold">Reservar cita</a>
-    <a href="https://wa.me/34671745348" target="_blank" class="btn btn-whatsapp">Escribir por WhatsApp</a>
+    <a href="#reserva" class="btn btn-gold btn-big">Reservar cita</a>
   </div>
 </section>
 
@@ -532,35 +545,66 @@
 </section>
 
 <section class="hero-recap">
-  <div class="hero-inner">
+  <div class="hero-inner cards-wide">
     <div class="hero-tag">Barbero a domicilio · Barcelona</div>
 
-    <div class="ig-card reveal">
-      <div class="ring">
-        <img src="assets/instagram/profile.jpg" alt="Foto de perfil de THE BRONX BARBER" />
-      </div>
-      <div class="ig-name">
-        THE BRONX BARBER
-        <span class="verified">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M9 12.5l2 2 4.5-4.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-      <a href="https://www.instagram.com/the.bronx.barber/" target="_blank" class="ig-handle">@the.bronx.barber</a>
-      <div class="ig-meta">Barbero · Barcelona, España</div>
-      <p class="ig-bio">Barbero PERUCHO por España 🇵🇪🇪🇸
+    <div class="cards-row">
+      <div class="ig-card reveal">
+        <div class="ring">
+          <img src="assets/tiktok/profile.jpg" alt="Logo de THE BRONX BARBER en TikTok" />
+        </div>
+        <div class="ig-name">
+          THE BRONX BARBER
+          <span class="verified">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12.5l2 2 4.5-4.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <a href="https://www.tiktok.com/@thebronxbarber" target="_blank" class="ig-handle">@thebronxbarber</a>
+        <div class="ig-meta">Barbero · Barcelona, España</div>
+        <p class="ig-bio">Barbero PERUCHO por España 🇵🇪🇪🇸
 📍 BCN L4 Maragall
 Citas al privado 💈</p>
 
-      <div class="ig-stats">
-        <div class="ig-stat"><strong>22</strong><span>Posts</span></div>
-        <div class="ig-stat"><strong>123</strong><span>Seguidores</span></div>
-        <div class="ig-stat"><strong>94</strong><span>Seguidos</span></div>
+        <div class="ig-stats">
+          <div class="ig-stat"><strong>392</strong><span>Seguidos</span></div>
+          <div class="ig-stat"><strong>83</strong><span>Seguidores</span></div>
+          <div class="ig-stat"><strong>371</strong><span>Me gusta</span></div>
+        </div>
+
+        <div class="ig-actions">
+          <a href="#reserva" class="btn btn-gold">Reservar cita</a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+          <a href="https://www.tiktok.com/@thebronxbarber" target="_blank" class="btn btn-outline">Seguir en TikTok</a>
+        </div>
       </div>
 
-      <div class="ig-actions">
-        <a href="#reserva" class="btn btn-gold">Reservar cita</a>
-        <a href="#servicios" class="btn btn-outline">Ver servicios</a>
-        <a href="https://www.instagram.com/the.bronx.barber/" target="_blank" class="btn btn-outline">Seguir en Instagram</a>
+      <div class="ig-card reveal">
+        <div class="ring">
+          <img src="assets/instagram/profile.jpg" alt="Foto de perfil de THE BRONX BARBER" />
+        </div>
+        <div class="ig-name">
+          THE BRONX BARBER
+          <span class="verified">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12.5l2 2 4.5-4.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+        <a href="https://www.instagram.com/the.bronx.barber/" target="_blank" class="ig-handle">@the.bronx.barber</a>
+        <div class="ig-meta">Barbero · Barcelona, España</div>
+        <p class="ig-bio">Barbero PERUCHO por España 🇵🇪🇪🇸
+📍 BCN L4 Maragall
+Citas al privado 💈</p>
+
+        <div class="ig-stats">
+          <div class="ig-stat"><strong>22</strong><span>Posts</span></div>
+          <div class="ig-stat"><strong>123</strong><span>Seguidores</span></div>
+          <div class="ig-stat"><strong>94</strong><span>Seguidos</span></div>
+        </div>
+
+        <div class="ig-actions">
+          <a href="#reserva" class="btn btn-gold">Reservar cita</a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+          <a href="https://www.instagram.com/the.bronx.barber/" target="_blank" class="btn btn-outline">Seguir en Instagram</a>
+        </div>
       </div>
     </div>
 
