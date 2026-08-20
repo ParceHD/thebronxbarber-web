@@ -370,8 +370,8 @@
     aspect-ratio: 4/3;
     background: #000;
   }
-  .eventos-track { display: flex; height: 100%; transition: transform 1s ease; }
-  .eventos-track img { width: 100%; height: 100%; object-fit: cover; flex: 0 0 100%; }
+  .photo-track { display: flex; height: 100%; transition: transform 1s ease; }
+  .photo-track img { width: 100%; height: 100%; object-fit: cover; flex: 0 0 100%; }
   .eventos-list { list-style: none; display: grid; gap: 12px; margin-bottom: 28px; }
   .eventos-list li { color: var(--text-dim); font-size: 0.95rem; padding-left: 28px; position: relative; }
   .eventos-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
@@ -499,7 +499,10 @@
       </div>
     </div>
     <div class="about-photo reveal">
-      <img src="assets/instagram/corte-mullet.jpg" alt="Diseño y degradado real de THE BRONX BARBER" />
+      <div class="photo-track">
+        <img src="assets/instagram/corte-mullet.jpg" alt="Diseño y degradado real de THE BRONX BARBER" />
+        <img src="assets/instagram/sobremi-4.jpg" alt="Diseño real de THE BRONX BARBER" />
+      </div>
     </div>
   </div>
 </section>
@@ -583,7 +586,7 @@
 <section id="eventos" class="eventos">
   <div class="wrap eventos-grid">
     <div class="eventos-carousel reveal">
-      <div class="eventos-track">
+      <div class="photo-track">
         <img src="assets/instagram/evento-festival.jpg" alt="Estand de THE BRONX BARBER en un festival" />
       </div>
     </div>
@@ -817,18 +820,16 @@ Citas al privado 💈</p>
     parallaxBg.style.transform = `translateY(${offset}px)`;
   });
 
-  // Eventos carousel
-  (function () {
-    const track = document.querySelector('.eventos-track');
-    if (!track) return;
+  // Photo carousels (Sobre mí, Eventos)
+  document.querySelectorAll('.photo-track').forEach((track) => {
     const count = track.children.length;
     if (count < 2) return;
     let i = 0;
     setInterval(() => {
       i = (i + 1) % count;
       track.style.transform = `translateX(-${i * 100}%)`;
-    }, 3500);
-  })();
+    }, 5000);
+  });
 
   // Booking form -> WhatsApp
   document.getElementById('bookingForm').addEventListener('submit', function (e) {
