@@ -360,21 +360,26 @@
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
-  .eventos-inner { text-align: center; }
-  .eventos-text { max-width: 640px; margin: 0 auto; }
-  .eventos-text .eyebrow { display: block; }
-  .eventos-photos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    max-width: 640px;
-    margin: 0 auto 36px;
+  .eventos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  @media (max-width: 860px) { .eventos-grid { grid-template-columns: 1fr; } }
+  .eventos-carousel {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 4/3;
+    background: #000;
   }
-  .eventos-photos img {
-    width: 100%; aspect-ratio: 4/3; object-fit: cover;
-    border-radius: 16px; border: 1px solid var(--border);
+  .eventos-carousel img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease;
   }
-  @media (max-width: 560px) { .eventos-photos { grid-template-columns: 1fr; } }
+  .eventos-carousel img.active { opacity: 1; }
+  .eventos-list { list-style: none; display: grid; gap: 12px; margin-bottom: 28px; }
+  .eventos-list li { color: var(--text-dim); font-size: 0.95rem; padding-left: 28px; position: relative; }
+  .eventos-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
 
   /* RESERVA */
   .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
@@ -581,11 +586,20 @@
 </section>
 
 <section id="eventos" class="eventos">
-  <div class="wrap eventos-inner">
+  <div class="wrap eventos-grid">
+    <div class="eventos-carousel reveal">
+      <img src="assets/instagram/evento-festival.jpg" class="active" alt="Estand de THE BRONX BARBER en un festival" />
+    </div>
     <div class="eventos-text reveal">
       <span class="eyebrow">Eventos y estands</span>
       <h2 class="section-title">Lleva <span class="gold-text">THE BRONX BARBER</span> a tu evento</h2>
-      <p class="section-sub" style="margin-bottom:28px;">¿Organizas una feria, una fiesta de empresa o cualquier celebración? Monto un estand de cortes en directo y le doy a tu evento ese toque diferente que la gente recuerda.</p>
+      <p class="section-sub" style="margin-bottom:24px;">¿Organizas una boda, un festival, una feria o una fiesta de empresa? Monto un estand profesional de cortes en directo y le doy a tu evento ese toque que la gente recuerda.</p>
+      <ul class="eventos-list">
+        <li>Estand propio, con espejo iluminado y ambientación de marca</li>
+        <li>Cortes y arreglos exclusivos en directo para tus invitados</li>
+        <li>Grandes descuentos en reservas para grupos y empresas</li>
+        <li>Una experiencia que se convierte en parte del evento</li>
+      </ul>
       <a href="#reserva" class="btn btn-gold btn-big">Solicitar para mi evento</a>
     </div>
   </div>
@@ -805,6 +819,18 @@ Citas al privado 💈</p>
     const offset = rect.top * 0.15;
     parallaxBg.style.transform = `translateY(${offset}px)`;
   });
+
+  // Eventos carousel
+  (function () {
+    const imgs = document.querySelectorAll('.eventos-carousel img');
+    if (imgs.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      imgs[i].classList.remove('active');
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add('active');
+    }, 3500);
+  })();
 
   // Booking form -> WhatsApp
   document.getElementById('bookingForm').addEventListener('submit', function (e) {
