@@ -351,6 +351,31 @@
   .dom-card h3 { font-size: 1rem; margin-bottom: 10px; }
   .dom-card p { color: var(--text-dim); font-size: 0.88rem; }
 
+  /* EVENTOS */
+  .eventos {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(212,175,55,0.1), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(212,175,55,0.08), transparent 50%),
+      var(--bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .eventos-inner { text-align: center; }
+  .eventos-text { max-width: 640px; margin: 0 auto; }
+  .eventos-text .eyebrow { display: block; }
+  .eventos-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    max-width: 640px;
+    margin: 0 auto 36px;
+  }
+  .eventos-photos img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    border-radius: 16px; border: 1px solid var(--border);
+  }
+  @media (max-width: 560px) { .eventos-photos { grid-template-columns: 1fr; } }
+
   /* RESERVA */
   .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
   @media (max-width: 860px) { .booking-wrap { grid-template-columns: 1fr; } }
@@ -442,6 +467,7 @@
     <a href="#sobre-mi">Sobre mí</a>
     <a href="#servicios">Servicios</a>
     <a href="#domicilio">A domicilio</a>
+    <a href="#eventos">Eventos</a>
     <a href="#reserva">Reserva</a>
     <a href="#contacto">Contacto</a>
   </div>
@@ -554,6 +580,17 @@
   </div>
 </section>
 
+<section id="eventos" class="eventos">
+  <div class="wrap eventos-inner">
+    <div class="eventos-text reveal">
+      <span class="eyebrow">Eventos y estands</span>
+      <h2 class="section-title">Lleva <span class="gold-text">THE BRONX BARBER</span> a tu evento</h2>
+      <p class="section-sub" style="margin-bottom:28px;">¿Organizas una feria, una fiesta de empresa o cualquier celebración? Monto un estand de cortes en directo y le doy a tu evento ese toque diferente que la gente recuerda.</p>
+      <a href="#reserva" class="btn btn-gold btn-big">Solicitar para mi evento</a>
+    </div>
+  </div>
+</section>
+
 <section class="hero-recap">
   <div class="hero-inner cards-wide">
     <div class="hero-tag">Barbero a domicilio · Barcelona</div>
@@ -658,6 +695,7 @@ Citas al privado 💈</p>
             <option>Arreglo de barba</option>
             <option>Corte + barba</option>
             <option>Diseño / degradado</option>
+            <option>Evento / Estand</option>
             <option>Otro</option>
           </select>
         </div>
@@ -677,7 +715,7 @@ Citas al privado 💈</p>
         </div>
       </div>
       <div class="field">
-        <label for="direccion">Dirección del domicilio</label>
+        <label for="direccion">Dirección (domicilio o evento)</label>
         <input type="text" id="direccion" required placeholder="Calle, número, ciudad" />
       </div>
       <div class="field">
@@ -773,20 +811,31 @@ Citas al privado 💈</p>
     e.preventDefault();
     const nombre = document.getElementById('nombre').value.trim();
     const servicio = document.getElementById('servicio').value;
-    const fecha = document.getElementById('fecha').value;
+    const fechaRaw = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
     const telefono = document.getElementById('telefono').value.trim();
     const direccion = document.getElementById('direccion').value.trim();
     const notas = document.getElementById('notas').value.trim();
+    const esEvento = servicio === 'Evento / Estand';
 
-    let msg = `Hola! Quiero reservar cita con THE BRONX BARBER 💈\n\n`;
-    msg += `Nombre: ${nombre}\n`;
+    let fecha = fechaRaw;
+    if (fechaRaw) {
+      const [y, m, d] = fechaRaw.split('-');
+      fecha = `${d}/${m}/${y}`;
+    }
+
+    const linea = '───────────────';
+    let msg = `Hola, soy ${nombre} 👋\n`;
+    msg += `Quiero reservar con THE BRONX BARBER 💈\n\n`;
+    msg += `${linea}\n`;
     msg += `Servicio: ${servicio}\n`;
     msg += `Fecha preferida: ${fecha}\n`;
     if (hora) msg += `Hora preferida: ${hora}\n`;
-    if (telefono) msg += `Mi teléfono: ${telefono}\n`;
-    msg += `Dirección (a domicilio): ${direccion}\n`;
-    if (notas) msg += `Notas: ${notas}\n`;
+    if (telefono) msg += `Teléfono: ${telefono}\n`;
+    msg += `${esEvento ? 'Ubicación del evento' : 'Dirección (a domicilio)'}: ${direccion}\n`;
+    msg += `${linea}\n`;
+    if (notas) msg += `\nNotas: ${notas}\n`;
+    msg += `\n¡Gracias!`;
 
     const url = `https://wa.me/34671745348?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
